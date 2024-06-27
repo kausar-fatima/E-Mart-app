@@ -4,3 +4,7 @@ export './strings.dart';
 export './styles.dart';
 export 'package:velocity_x/velocity_x.dart';
 export 'package:flutter/material.dart';
+export 'package:e_mart_app/views/auth_screens/login_screen.dart';
+export 'package:e_mart_app/widgets_common/applogo_widget.dart';
+export 'package:get/get.dart';
+export 'package:e_mart_app/views/splash_screen/splash_screen.dart';
