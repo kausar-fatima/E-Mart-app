@@ -1,7 +1,6 @@
 import 'package:e_mart_app/consts/consts.dart';
-import 'package:e_mart_app/widgets_common/home_buttons.dart';
+import 'package:e_mart_app/views/home_screen/components/featured_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -112,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    5.heightBox,
+                    20.heightBox,
                     //featured categories
                     Align(
                       alignment: Alignment.centerLeft,
@@ -121,6 +120,26 @@ class HomeScreen extends StatelessWidget {
                           .size(18)
                           .fontFamily(semibold)
                           .make(),
+                    ),
+                    20.heightBox,
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: List.generate(
+                            3,
+                            (index) => Column(
+                                  children: [
+                                    featuredButton(
+                                        icon: featuredImages1[index],
+                                        title: featuredTitles1[index]),
+                                    10.heightBox,
+                                    featuredButton(
+                                        icon: featuredImages2[index],
+                                        title: featuredTitles2[index])
+                                  ],
+                                )),
+                      ),
                     ),
                   ],
                 ),
