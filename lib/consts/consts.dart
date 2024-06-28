@@ -21,3 +21,4 @@ export 'package:e_mart_app/views/home_screen/home_screen.dart';
 export 'package:e_mart_app/views/profile_screen/profile_screen.dart';
 export 'package:e_mart_app/widgets_common/home_buttons.dart';
 export 'package:e_mart_app/views/category_screen/category_details.dart';
+export 'package:e_mart_app/views/profile_screen/components/details_cart.dart';

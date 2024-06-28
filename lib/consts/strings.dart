@@ -60,3 +60,6 @@ const video = "Video",
     productsyoumaylike = "Products you may also like";
 
 const logout = "Logout";
+
+// Profile strings
+const wishlist = "My Wishlist", orders = "My Orders", messages = "Messages";
