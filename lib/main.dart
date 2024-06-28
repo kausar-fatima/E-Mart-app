@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
       title: appname,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.transparent,
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent),
+        appBarTheme: const AppBarTheme(
+            elevation: 0.0,
+            iconTheme: IconThemeData(color: darkFontGrey),
+            backgroundColor: Colors.transparent),
         fontFamily: regular,
       ),
       home: LoginScreen(),
