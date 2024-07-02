@@ -22,3 +22,7 @@ export 'package:e_mart_app/views/profile_screen/profile_screen.dart';
 export 'package:e_mart_app/widgets_common/home_buttons.dart';
 export 'package:e_mart_app/views/category_screen/category_details.dart';
 export 'package:e_mart_app/views/profile_screen/components/details_cart.dart';
+export 'package:firebase_core/firebase_core.dart';
+export 'package:firebase_auth/firebase_auth.dart';
+export 'package:cloud_firestore/cloud_firestore.dart';
+export './firebase_consts.dart';

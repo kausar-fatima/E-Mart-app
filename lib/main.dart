@@ -1,6 +1,8 @@
 import 'package:e_mart_app/consts/consts.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

@@ -1,5 +1,5 @@
 import 'package:e_mart_app/consts/consts.dart';
-import 'package:flutter/material.dart';
+import 'package:e_mart_app/controllers/auth_controller.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -10,6 +10,14 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool? isCheck = false;
+  var controller = Get.put(AuthController());
+
+  // text controllers
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+  var retypepasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return bgWidget(
@@ -25,10 +33,26 @@ class _SignupScreenState extends State<SignupScreen> {
               15.heightBox,
               Column(
                 children: [
-                  customTextField(title: name, hint: nameHint),
-                  customTextField(title: email, hint: emailHint),
-                  customTextField(title: "Password", hint: passwordHint),
-                  customTextField(title: retypepassword, hint: passwordHint),
+                  customTextField(
+                      title: name,
+                      hint: nameHint,
+                      controller: nameController,
+                      isPass: false),
+                  customTextField(
+                      title: email,
+                      hint: emailHint,
+                      controller: email,
+                      isPass: false),
+                  customTextField(
+                      title: "Password",
+                      hint: passwordHint,
+                      controller: passwordController,
+                      isPass: true),
+                  customTextField(
+                      title: retypepassword,
+                      hint: passwordHint,
+                      controller: retypepasswordController,
+                      isPass: true),
                   Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
@@ -80,13 +104,34 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   15.heightBox,
                   cusButton(
-                          color: redColor,
-                          title: signup,
-                          textColor: whiteColor,
-                          onPress: () {})
-                      .box
-                      .width(context.screenWidth - 50)
-                      .make(),
+                      color: redColor,
+                      title: signup,
+                      textColor: whiteColor,
+                      onPress: () async {
+                        if (isCheck != false) {
+                          try {
+                            await controller
+                                .signupMethod(
+                              context: context,
+                              email: emailController.text,
+                              password: passwordController,
+                            )
+                                .then((value) {
+                              return controller.storeUserData(
+                                email: emailController.text,
+                                password: passwordController.text,
+                                name: nameController.text,
+                              );
+                            }).then((value) {
+                              VxToast.show(context, msg: loggedin);
+                              Get.offAll(() => Home());
+                            });
+                          } catch (e) {
+                            auth.signOut();
+                            VxToast.show(context, msg: e.toString());
+                          }
+                        }
+                      }).box.width(context.screenWidth - 50).make(),
                   10.heightBox,
                   RichText(
                     text: TextSpan(
