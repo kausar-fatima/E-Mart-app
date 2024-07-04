@@ -41,7 +41,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   customTextField(
                       title: email,
                       hint: emailHint,
-                      controller: email,
+                      controller: emailController,
                       isPass: false),
                   customTextField(
                       title: "Password",
@@ -114,7 +114,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 .signupMethod(
                               context: context,
                               email: emailController.text,
-                              password: passwordController,
+                              password: passwordController.text,
                             )
                                 .then((value) {
                               return controller.storeUserData(
