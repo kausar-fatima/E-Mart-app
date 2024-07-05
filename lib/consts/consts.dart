@@ -26,3 +26,8 @@ export 'package:firebase_core/firebase_core.dart';
 export 'package:firebase_auth/firebase_auth.dart';
 export 'package:cloud_firestore/cloud_firestore.dart';
 export './firebase_consts.dart';
+export 'package:e_mart_app/controllers/auth_controller.dart';
+export 'package:e_mart_app/views/profile_screen/components/edit_profile_screen.dart';
+export 'package:flutter/services.dart';
+export 'package:image_picker/image_picker.dart';
+export 'package:path/path.dart';

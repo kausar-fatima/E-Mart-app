@@ -1,10 +1,16 @@
 import 'package:e_mart_app/consts/consts.dart';
 
 class AuthController extends GetxController {
-  Future<UserCredential?> loginMethod({email, password, context}) async {
+  var isloading = false.obs;
+  // text controllers
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
+  Future<UserCredential?> loginMethod({context}) async {
     UserCredential? userCredential;
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
+      await auth.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
     } on FirebaseAuthException catch (e) {
       VxToast.show(context, msg: e.toString());
     }
@@ -32,6 +38,10 @@ class AuthController extends GetxController {
       'password': password,
       'email': email,
       'imageUrl': '',
+      'id': currentUser!.uid,
+      'wishlist_count': '00',
+      'cart_count': '00',
+      'order_count': '00',
     });
   }
 

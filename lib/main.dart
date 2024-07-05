@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.transparent),
         fontFamily: regular,
       ),
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
