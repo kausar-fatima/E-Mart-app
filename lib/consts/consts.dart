@@ -31,3 +31,5 @@ export 'package:e_mart_app/views/profile_screen/components/edit_profile_screen.d
 export 'package:flutter/services.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:path/path.dart';
+export 'package:e_mart_app/controllers/profile_controller.dart';
+export 'package:e_mart_app/services/firestore_services.dart';
