@@ -1,7 +1,4 @@
 import 'package:e_mart_app/consts/consts.dart';
-import 'package:e_mart_app/views/home_screen/components/featured_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

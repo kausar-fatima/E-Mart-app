@@ -1,6 +1,4 @@
 import 'package:e_mart_app/consts/consts.dart';
-import 'package:e_mart_app/views/category_screen/item_details.dart';
-import 'package:flutter/material.dart';
 
 class CategoryDetails extends StatelessWidget {
   const CategoryDetails({super.key, this.title});

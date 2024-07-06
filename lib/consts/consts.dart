@@ -33,3 +33,6 @@ export 'package:image_picker/image_picker.dart';
 export 'package:path/path.dart';
 export 'package:e_mart_app/controllers/profile_controller.dart';
 export 'package:e_mart_app/services/firestore_services.dart';
+export 'package:firebase_storage/firebase_storage.dart';
+export 'package:e_mart_app/views/category_screen/item_details.dart';
+export 'package:e_mart_app/views/home_screen/components/featured_button.dart';

@@ -18,7 +18,8 @@ const loggedin = "Logged in successfully";
 const loggedout = "Logged out successfully";
 const termAndCond = "Terms and Conditions";
 const alreadyHaveAccount = "Already have an account? ";
-
+const oldpass = "Old password";
+const newpass = "New password";
 //home strings
 const home = "Home",
     categories = "Categories",

@@ -1,5 +1,4 @@
 import 'package:e_mart_app/consts/consts.dart';
-import 'package:flutter/material.dart';
 
 class ItemDetails extends StatelessWidget {
   const ItemDetails({super.key, this.title});

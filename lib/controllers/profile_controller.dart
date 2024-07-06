@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:e_mart_app/consts/consts.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class ProfileController extends GetxController {
   var profileImgPath = ''.obs;
@@ -10,7 +9,8 @@ class ProfileController extends GetxController {
 
   //Textfields
   var nameController = TextEditingController();
-  var passController = TextEditingController();
+  var oldpassController = TextEditingController();
+  var newpassController = TextEditingController();
 
   changeImage(context) async {
     try {
@@ -39,5 +39,14 @@ class ProfileController extends GetxController {
       'imageUrl': imgUrl,
     }, SetOptions(merge: true));
     isLoading(false);
+  }
+
+  changeAuthPassword({email, password, newpassword}) async {
+    final cred = EmailAuthProvider.credential(email: email, password: password);
+    await currentUser!.reauthenticateWithCredential(cred).then((value) {
+      currentUser!.updatePassword(newpassword);
+    }).catchError((error) {
+      print(error.toString());
+    });
   }
 }
