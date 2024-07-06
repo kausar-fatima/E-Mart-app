@@ -1,4 +1,5 @@
 import 'package:e_mart_app/consts/consts.dart';
+import 'package:e_mart_app/controllers/product_controller.dart';
 
 class CategoryDetails extends StatelessWidget {
   const CategoryDetails({super.key, this.title});
@@ -7,6 +8,7 @@ class CategoryDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<ProductController>();
     return bgWidget(
       child: Scaffold(
         appBar: AppBar(
@@ -14,14 +16,16 @@ class CategoryDetails extends StatelessWidget {
         ),
         body: Container(
           padding: EdgeInsets.all(12),
-          child: Column(children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             SingleChildScrollView(
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: List.generate(
-                  6,
-                  (index) => "Baby Clothing"
+                  controller.subcat.length,
+                  (index) => controller.subcat[index]
+                      .toString()
                       .text
                       .size(12)
                       .fontFamily(semibold)

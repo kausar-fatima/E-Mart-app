@@ -1,10 +1,12 @@
 import 'package:e_mart_app/consts/consts.dart';
+import 'package:e_mart_app/controllers/product_controller.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ProductController());
     return bgWidget(
         child: Scaffold(
       appBar: AppBar(
@@ -42,6 +44,7 @@ class CategoryScreen extends StatelessWidget {
                   .outerShadowSm
                   .make()
                   .onTap(() {
+                controller.getSubCategories(categoriesList[index]);
                 Get.to(CategoryDetails(
                   title: categoriesList[index],
                 ));
