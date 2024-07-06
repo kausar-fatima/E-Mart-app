@@ -43,7 +43,7 @@ const searchanything = "Search anything...",
     featuredCategories = "Featured Categories";
 
 // category strings
-const womenClothing = "Women Clothing",
+const womenClothing = "Women Dresses",
     menClothingFashion = "Men Clothing & Fashion",
     compAccess = "Computer & Accessories",
     automobile = "Automobile",

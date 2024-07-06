@@ -1,5 +1,4 @@
 import 'package:e_mart_app/consts/consts.dart';
-import 'package:e_mart_app/controllers/product_controller.dart';
 
 class ItemDetails extends StatelessWidget {
   const ItemDetails({super.key, this.title, this.data});
@@ -16,13 +15,13 @@ class ItemDetails extends StatelessWidget {
         title: title!.text.color(darkFontGrey).fontFamily(bold).make(),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.share,
             ),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.favorite_outline,
             ),
             onPressed: () {},
@@ -33,7 +32,7 @@ class ItemDetails extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +111,7 @@ class ItemDetails extends StatelessWidget {
                         .box
                         .height(60)
                         .padding(
-                          EdgeInsets.symmetric(
+                          const EdgeInsets.symmetric(
                             horizontal: 16,
                           ),
                         )
@@ -140,11 +139,12 @@ class ItemDetails extends StatelessWidget {
                                         .roundedFull
                                         .color(
                                           Color(
-                                            data['p_colors'][index],
+                                            int.parse(data['p_colors'][index]),
                                           ).withOpacity(1.0),
                                         )
                                         .margin(
-                                          EdgeInsets.symmetric(horizontal: 4),
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 4),
                                         )
                                         .make()
                                         .onTap(() {
@@ -163,7 +163,7 @@ class ItemDetails extends StatelessWidget {
                               ),
                             ),
                           ],
-                        ).box.padding(EdgeInsets.all(8)).make(),
+                        ).box.padding(const EdgeInsets.all(8)).make(),
 
                         //quantity section
                         Row(
@@ -202,7 +202,7 @@ class ItemDetails extends StatelessWidget {
                                       ),
                                     );
                                   },
-                                  icon: Icon(Icons.add),
+                                  icon: const Icon(Icons.add),
                                 ),
                                 10.widthBox,
                                 "(${data['p_quantity']} available)"
@@ -212,7 +212,7 @@ class ItemDetails extends StatelessWidget {
                               ]),
                             ),
                           ],
-                        ).box.padding(EdgeInsets.all(8)).make(),
+                        ).box.padding(const EdgeInsets.all(8)).make(),
 
                         // total row
                         Row(
@@ -241,7 +241,7 @@ class ItemDetails extends StatelessWidget {
                         .fontFamily(semibold)
                         .make(),
                     10.heightBox,
-                    "${data['p_desc']}".text.color(darkFontGrey).make(),
+                    "${data['p_description']}".text.color(darkFontGrey).make(),
 
                     // buttons Section
                     10.heightBox,
@@ -255,7 +255,7 @@ class ItemDetails extends StatelessWidget {
                                     .fontFamily(semibold)
                                     .color(darkFontGrey)
                                     .make(),
-                                trailing: Icon(Icons.arrow_forward),
+                                trailing: const Icon(Icons.arrow_forward),
                               )),
                     ),
 
@@ -297,9 +297,9 @@ class ItemDetails extends StatelessWidget {
                           )
                               .box
                               .white
-                              .margin(EdgeInsets.symmetric(horizontal: 8))
+                              .margin(const EdgeInsets.symmetric(horizontal: 8))
                               .roundedSM
-                              .padding(EdgeInsets.all(8))
+                              .padding(const EdgeInsets.all(8))
                               .make(),
                         ),
                       ),

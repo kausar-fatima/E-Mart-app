@@ -36,3 +36,5 @@ export 'package:e_mart_app/services/firestore_services.dart';
 export 'package:firebase_storage/firebase_storage.dart';
 export 'package:e_mart_app/views/category_screen/item_details.dart';
 export 'package:e_mart_app/views/home_screen/components/featured_button.dart';
+export 'package:e_mart_app/controllers/product_controller.dart';
+export 'package:e_mart_app/widgets_common/loading_indicator.dart';

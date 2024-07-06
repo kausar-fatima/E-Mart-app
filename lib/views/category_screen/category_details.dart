@@ -1,6 +1,4 @@
 import 'package:e_mart_app/consts/consts.dart';
-import 'package:e_mart_app/controllers/product_controller.dart';
-import 'package:e_mart_app/widgets_common/loading_indicator.dart';
 
 class CategoryDetails extends StatelessWidget {
   const CategoryDetails({super.key, this.title});
