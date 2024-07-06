@@ -52,25 +52,22 @@ class ProfileScreen extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ).box.roundedFull.clip(Clip.antiAlias).make()
                             : Image.network(
-                                imgProfile,
+                                data['imageUrl'],
                                 width: 100,
                                 fit: BoxFit.cover,
                               ).box.roundedFull.clip(Clip.antiAlias).make(),
                         Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                data['name']
-                                    .toString()
-                                    .text
-                                    .white
-                                    .fontFamily(semibold)
-                                    .make(),
-                                data['email'].toString().text.white.make(),
-                              ],
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              data['name']
+                                  .toString()
+                                  .text
+                                  .white
+                                  .fontFamily(semibold)
+                                  .make(),
+                              data['email'].toString().text.white.make(),
+                            ],
                           ),
                         ),
                         OutlinedButton(
