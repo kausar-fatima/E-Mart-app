@@ -10,6 +10,7 @@ class CategoryScreen extends StatelessWidget {
         child: Scaffold(
       appBar: AppBar(
         title: categories.text.fontFamily(bold).white.make(),
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         padding: const EdgeInsets.all(12),

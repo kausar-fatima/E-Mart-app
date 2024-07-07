@@ -1,4 +1,5 @@
 import 'package:e_mart_app/consts/consts.dart';
+import 'package:e_mart_app/widgets_common/exit_dialog.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -41,27 +42,39 @@ class Home extends StatelessWidget {
       ProfileScreen()
     ];
 
-    return Scaffold(
-      body: Column(
-        children: [
-          Obx(
-            () => Expanded(
-              child: navBody.elementAt(controller.currentNavIndex.value),
+    return PopScope(
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) {
+                return exitDialog(context);
+              });
+        }
+      },
+      child: Scaffold(
+        body: Column(
+          children: [
+            Obx(
+              () => Expanded(
+                child: navBody.elementAt(controller.currentNavIndex.value),
+              ),
             ),
+          ],
+        ),
+        bottomNavigationBar: Obx(
+          () => BottomNavigationBar(
+            currentIndex: controller.currentNavIndex.value,
+            backgroundColor: whiteColor,
+            selectedItemColor: redColor,
+            selectedLabelStyle: TextStyle(fontFamily: semibold),
+            type: BottomNavigationBarType.fixed,
+            items: navbarItems,
+            onTap: (value) {
+              controller.currentNavIndex.value = value;
+            },
           ),
-        ],
-      ),
-      bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.currentNavIndex.value,
-          backgroundColor: whiteColor,
-          selectedItemColor: redColor,
-          selectedLabelStyle: TextStyle(fontFamily: semibold),
-          type: BottomNavigationBarType.fixed,
-          items: navbarItems,
-          onTap: (value) {
-            controller.currentNavIndex.value = value;
-          },
         ),
       ),
     );
