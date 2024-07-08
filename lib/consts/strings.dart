@@ -66,3 +66,6 @@ const logout = "Logout";
 
 // Profile strings
 const wishlist = "My Wishlist", orders = "My Orders", messages = "Messages";
+
+// payment method strings
+const paypal = "Paypal", stripe = "Stripe", cod = "Cash on delivery";

@@ -1,5 +1,4 @@
 import 'package:e_mart_app/consts/consts.dart';
-import 'package:e_mart_app/controllers/cart_controller.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -8,6 +7,18 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var controller = Get.put(CartController());
     return Scaffold(
+      backgroundColor: whiteColor,
+      bottomNavigationBar: SizedBox(
+        width: context.screenWidth - 60,
+        child: cusButton(
+          color: redColor,
+          onPress: () {
+            Get.to(() => ShippingDetails());
+          },
+          textColor: whiteColor,
+          title: "Proceed to shipping",
+        ),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: "Shopping Cart"
@@ -88,15 +99,15 @@ class CartScreen extends StatelessWidget {
                       .roundedSM
                       .make(),
                   10.heightBox,
-                  SizedBox(
-                    width: context.screenWidth - 60,
-                    child: cusButton(
-                      color: redColor,
-                      onPress: () {},
-                      textColor: whiteColor,
-                      title: "Proceed to shipping",
-                    ),
-                  )
+                  // SizedBox(
+                  //   width: context.screenWidth - 60,
+                  //   child: cusButton(
+                  //     color: redColor,
+                  //     onPress: () {},
+                  //     textColor: whiteColor,
+                  //     title: "Proceed to shipping",
+                  //   ),
+                  // )
                 ],
               ),
             );

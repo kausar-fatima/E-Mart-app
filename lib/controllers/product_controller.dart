@@ -5,6 +5,7 @@ class ProductController extends GetxController {
   var quantity = 0.obs;
   var colorIndex = 0.obs;
   var totalprice = 0.obs;
+  var isFav = false.obs;
   var subcat = [];
   getSubCategories(title) async {
     subcat.clear();
@@ -61,5 +62,29 @@ class ProductController extends GetxController {
     totalprice.value = 0;
     quantity.value = 0;
     colorIndex.value = 0;
+  }
+
+  addToWishlist(docId, context) async {
+    await firestore.collection(productCollection).doc(docId).set({
+      'p_wishlist': FieldValue.arrayUnion([currentUser!.uid])
+    }, SetOptions(merge: true));
+    isFav(true);
+    VxToast.show(context, msg: "Added to wishlist");
+  }
+
+  removeFromWishlist(docId, context) async {
+    await firestore.collection(productCollection).doc(docId).set({
+      'p_wishlist': FieldValue.arrayRemove([currentUser!.uid])
+    }, SetOptions(merge: true));
+    isFav(false);
+    VxToast.show(context, msg: "Removed from wishlist");
+  }
+
+  checkIffav(data) async {
+    if (data['p_wishlist'].contains(currentUser!.uid)) {
+      isFav(true);
+    } else {
+      isFav(false);
+    }
   }
 }
