@@ -1,7 +1,7 @@
 import 'package:e_mart_app/consts/consts.dart';
 
-class MessagesScreen extends StatelessWidget {
-  const MessagesScreen({super.key});
+class WishlistScreen extends StatelessWidget {
+  const WishlistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -9,16 +9,16 @@ class MessagesScreen extends StatelessWidget {
       backgroundColor: whiteColor,
       appBar: AppBar(
         title:
-            "My Messages".text.color(darkFontGrey).fontFamily(semibold).make(),
+            "My Wishliat".text.color(darkFontGrey).fontFamily(semibold).make(),
       ),
       body: StreamBuilder(
-          stream: FirestoreServices.getAllMessages(),
+          stream: FirestoreServices.getWishList(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
               return Center(child: loadingIndicator());
             } else if (snapshot.data!.docs.isEmpty) {
-              return "No messages Yet!".text.color(darkFontGrey).makeCentered();
+              return "No Wishlist Yet!".text.color(darkFontGrey).makeCentered();
             } else {
               return Container();
             }

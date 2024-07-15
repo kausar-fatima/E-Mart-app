@@ -1,4 +1,7 @@
 import 'package:e_mart_app/consts/consts.dart';
+import 'package:e_mart_app/views/chat_screen/messaging_screen.dart';
+import 'package:e_mart_app/views/orders_screen/order_screen.dart';
+import 'package:e_mart_app/views/wishlist_screen/wishlist.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -109,6 +112,19 @@ class ProfileScreen extends StatelessWidget {
                             shrinkWrap: true,
                             itemBuilder: (BuildContext context, int index) {
                               return ListTile(
+                                onTap: () {
+                                  switch (index) {
+                                    case 0:
+                                      Get.to(() => const OrderScreen());
+                                      break;
+                                    case 1:
+                                      Get.to(() => const WishlistScreen());
+                                      break;
+                                    case 2:
+                                      Get.to(() => const MessagesScreen());
+                                      break;
+                                  }
+                                },
                                 leading: Image.asset(
                                   profileButtonIcon[index],
                                   width: 22,

@@ -41,15 +41,21 @@ class CartScreen extends StatelessWidget {
           } else {
             var data = snapshot.data!.docs;
             controller.calculate(data);
+            controller.productSnapshot = data;
             return Padding(
               padding: EdgeInsets.all(8),
               child: Column(
                 children: [
                   Expanded(
                     child: ListView.builder(
+                      itemCount: data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
-                          leading: Image.network("${data[index]['img']}"),
+                          leading: Image.network(
+                            "${data[index]['img']}",
+                            width: 180,
+                            fit: BoxFit.cover,
+                          ),
                           title:
                               "${data[index]['title']}  x${data[index]['qty']}"
                                   .text
