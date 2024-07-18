@@ -1,7 +1,7 @@
 import 'package:e_mart_app/consts/consts.dart';
 import 'package:e_mart_app/views/chat_screen/messaging_screen.dart';
 import 'package:e_mart_app/views/orders_screen/order_screen.dart';
-import 'package:e_mart_app/views/wishlist_screen/wishlist.dart';
+import 'package:e_mart_app/views/wishlist_screen/wishlist_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -9,6 +9,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProfileController());
+    FirestoreServices.getCounts();
 
     return bgWidget(
       child: Scaffold(

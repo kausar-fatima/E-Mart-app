@@ -348,17 +348,21 @@ class ItemDetails extends StatelessWidget {
               child: cusButton(
                   color: redColor,
                   onPress: () {
-                    controller.addToCart(
-                        img: data['p_imgs'][0],
-                        vendorId: data['vendor_id'],
-                        title: data['p_name'],
-                        qty: controller.quantity.value,
-                        tprice: controller.totalprice.value,
-                        sellername: data['p_seller'],
-                        color: data['p_colors'][controller.colorIndex.value],
-                        context: context);
+                    if (controller.quantity.value > 0) {
+                      controller.addToCart(
+                          img: data['p_imgs'][0],
+                          vendorId: data['vendor_id'],
+                          title: data['p_name'],
+                          qty: controller.quantity.value,
+                          tprice: controller.totalprice.value,
+                          sellername: data['p_seller'],
+                          color: data['p_colors'][controller.colorIndex.value],
+                          context: context);
 
-                    VxToast.show(context, msg: "Added to Cart");
+                      VxToast.show(context, msg: "Added to Cart");
+                    } else {
+                      VxToast.show(context, msg: "Quantity can't be 0");
+                    }
                   },
                   textColor: whiteColor,
                   title: "Add to cart"),
