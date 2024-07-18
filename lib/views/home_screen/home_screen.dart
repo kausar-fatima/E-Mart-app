@@ -1,10 +1,12 @@
 import 'package:e_mart_app/consts/consts.dart';
+import 'package:e_mart_app/views/home_screen/components/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<HomeController>();
     return Container(
       padding: const EdgeInsets.all(12),
       color: lightGrey,
@@ -18,9 +20,23 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment.center,
               color: lightGrey,
               child: TextFormField(
+                controller: controller.searchController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  suffixIcon: Icon(Icons.search),
+                  suffixIcon: Icon(Icons.search).onTap(
+                    () {
+                      if (controller
+                          .searchController.text.isNotEmptyAndNotNull) {
+                        Get.to(
+                          () {
+                            SearchScreen(
+                              title: controller.searchController.text,
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
                   filled: true,
                   fillColor: whiteColor,
                   hintText: searchanything,
@@ -158,9 +174,10 @@ class HomeScreen extends StatelessWidget {
                           10.heightBox,
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: StreamBuilder(
-                                stream: FirestoreServices.getFeaturedProducts(),
-                                builder: (context, snapshot) {
+                            child: FutureBuilder(
+                                future: FirestoreServices.getFeaturedProducts(),
+                                builder: (context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
                                   if (!snapshot.hasData) {
                                     return Center(
                                       child: loadingIndicator(),
@@ -174,24 +191,26 @@ class HomeScreen extends StatelessWidget {
                                     var featuredData = snapshot.data!.docs;
                                     return Row(
                                       children: List.generate(
-                                        6,
+                                        featuredData.length,
                                         (index) => Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Image.asset(
-                                              imgP1,
-                                              width: 150,
+                                            Image.network(
+                                              featuredData[index]['p_imgs'][0],
+                                              width: 130,
+                                              height: 130,
                                               fit: BoxFit.cover,
                                             ),
                                             10.heightBox,
-                                            "Laptop 4GB/64GB"
+                                            "${featuredData[index]['p_name'][0]}"
                                                 .text
                                                 .fontFamily(semibold)
                                                 .color(darkFontGrey)
                                                 .make(),
                                             10.heightBox,
-                                            "\$600"
+                                            "${featuredData[index]['p_price'][0]}"
+                                                .numCurrency
                                                 .text
                                                 .color(redColor)
                                                 .size(16)
@@ -205,7 +224,18 @@ class HomeScreen extends StatelessWidget {
                                                 horizontal: 8))
                                             .roundedSM
                                             .padding(EdgeInsets.all(8))
-                                            .make(),
+                                            .make()
+                                            .onTap(
+                                          () {
+                                            Get.to(
+                                              () => ItemDetails(
+                                                title:
+                                                    "${featuredData[index]['p_name']}",
+                                                data: featuredData[index],
+                                              ),
+                                            );
+                                          },
+                                        ),
                                       ),
                                     );
                                   }

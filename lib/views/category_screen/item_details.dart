@@ -8,7 +8,7 @@ class ItemDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<ProductController>();
+    var controller = Get.put(ProductController());
     return PopScope(
       onPopInvoked: (didPop) {
         if (didPop) {

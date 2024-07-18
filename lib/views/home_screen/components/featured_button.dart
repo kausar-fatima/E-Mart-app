@@ -19,5 +19,14 @@ Widget featuredButton({String? title, icon}) {
       .margin(EdgeInsets.symmetric(horizontal: 4))
       .roundedSM
       .outerShadowSm
-      .make();
+      .make()
+      .onTap(
+    () {
+      Get.to(
+        () => CategoryDetails(
+          title: title,
+        ),
+      );
+    },
+  );
 }
