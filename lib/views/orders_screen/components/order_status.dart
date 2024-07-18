@@ -5,7 +5,7 @@ Widget orderStatus({icon, color, title, showDone}) {
     leading: Icon(
       icon,
       color: color,
-    ).box.border(color: color).make(),
+    ).box.border(color: color).roundedSM.padding(EdgeInsets.all(4)).make(),
     trailing: SizedBox(
       height: 100,
       width: 120,
