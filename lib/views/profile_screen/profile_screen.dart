@@ -2,6 +2,7 @@ import 'package:e_mart_app/consts/consts.dart';
 import 'package:e_mart_app/views/chat_screen/messaging_screen.dart';
 import 'package:e_mart_app/views/orders_screen/order_screen.dart';
 import 'package:e_mart_app/views/wishlist_screen/wishlist_screen.dart';
+import 'package:e_mart_app/widgets_common/loading_indicator.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -9,7 +10,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProfileController());
-    FirestoreServices.getCounts();
 
     return bgWidget(
       child: Scaffold(
@@ -46,67 +46,100 @@ class ProfileScreen extends StatelessWidget {
                     }),
 
                     // users details section
-                    Row(
-                      children: [
-                        data['imageUrl'] == ''
-                            ? Image.asset(
-                                imgProfile2,
-                                width: 100,
-                                fit: BoxFit.cover,
-                              ).box.roundedFull.clip(Clip.antiAlias).make()
-                            : Image.network(
-                                data['imageUrl'],
-                                width: 70,
-                                fit: BoxFit.cover,
-                              )
-                                .box
-                                .margin(EdgeInsets.symmetric(horizontal: 8))
-                                .roundedFull
-                                .clip(Clip.antiAlias)
-                                .make(),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              data['name']
-                                  .toString()
-                                  .text
-                                  .white
-                                  .fontFamily(semibold)
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          data['imageUrl'] == ''
+                              ? Image.asset(
+                                  imgProfile2,
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                ).box.roundedFull.clip(Clip.antiAlias).make()
+                              : Image.network(
+                                  data['imageUrl'],
+                                  width: 70,
+                                  fit: BoxFit.cover,
+                                )
+                                  .box
+                                  .margin(EdgeInsets.symmetric(horizontal: 8))
+                                  .roundedFull
+                                  .clip(Clip.antiAlias)
                                   .make(),
-                              data['email'].toString().text.white.make(),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                data['name']
+                                    .toString()
+                                    .text
+                                    .white
+                                    .fontFamily(semibold)
+                                    .make(),
+                                data['email'].toString().text.white.make(),
+                              ],
+                            ),
                           ),
-                        ),
-                        OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                                side: BorderSide(color: whiteColor)),
-                            onPressed: () async {
-                              await Get.put(AuthController())
-                                  .signoutMethod(context);
-                              Get.offAll(() => const LoginScreen());
-                            },
-                            child:
-                                logout.text.fontFamily(semibold).white.make())
-                      ],
+                          OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                  side: BorderSide(color: whiteColor)),
+                              onPressed: () async {
+                                await Get.put(AuthController())
+                                    .signoutMethod(context);
+                                Get.offAll(() => const LoginScreen());
+                              },
+                              child:
+                                  logout.text.fontFamily(semibold).white.make())
+                        ],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        detailsCard(
-                            count: data['cart_count'],
-                            title: "In your cart",
-                            width: context.screenWidth / 3.5),
-                        detailsCard(
-                            count: data['wishlist_count'],
-                            title: "In your wishlist",
-                            width: context.screenWidth / 3.5),
-                        detailsCard(
-                            count: data['order_count'],
-                            title: "your orders",
-                            width: context.screenWidth / 3.5)
-                      ],
-                    ),
+                    20.heightBox,
+                    FutureBuilder(
+                        future: FirestoreServices.getCounts(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: loadingIndicator(),
+                            );
+                          } else {
+                            var countdata = snapshot.data;
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                detailsCard(
+                                    count: countdata[0].toString(),
+                                    title: "In your cart",
+                                    width: context.screenWidth / 3.5),
+                                detailsCard(
+                                    count: countdata[1].toString(),
+                                    title: "In your wishlist",
+                                    width: context.screenWidth / 3.5),
+                                detailsCard(
+                                    count: countdata[2].toString(),
+                                    title: "your orders",
+                                    width: context.screenWidth / 3.5)
+                              ],
+                            );
+                          }
+                        }),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: [
+                    //     detailsCard(
+                    //         count: data['cart_count'],
+                    //         title: "In your cart",
+                    //         width: context.screenWidth / 3.5),
+                    //     detailsCard(
+                    //         count: data['wishlist_count'],
+                    //         title: "In your wishlist",
+                    //         width: context.screenWidth / 3.5),
+                    //     detailsCard(
+                    //         count: data['order_count'],
+                    //         title: "your orders",
+                    //         width: context.screenWidth / 3.5)
+                    //   ],
+                    // ),
                     // buttons section
 
                     ListView.separated(

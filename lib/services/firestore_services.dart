@@ -99,4 +99,16 @@ class FirestoreServices {
 
     return res;
   }
+
+  static allproducts() {
+    return firestore.collection(productCollection).snapshots();
+  }
+
+  // get featured products method
+  static getFeaturedProducts() {
+    return firestore
+        .collection(productCollection)
+        .where('is_featured', isEqualTo: true)
+        .snapshots();
+  }
 }
