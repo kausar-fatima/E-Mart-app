@@ -21,6 +21,7 @@ class OrderScreen extends StatelessWidget {
             } else {
               var data = snapshot.data!.docs;
               return ListView.builder(
+                itemCount: data.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: "${index + 1}"

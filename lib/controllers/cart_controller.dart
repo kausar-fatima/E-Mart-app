@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:e_mart_app/consts/consts.dart';
 
 class CartController extends GetxController {
@@ -24,12 +26,20 @@ class CartController extends GetxController {
     }
   }
 
+  String generateOrderCode() {
+    var timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+    var random = Random().nextInt(10000).toString().padLeft(4, '0');
+    return '$timestamp$random';
+  }
+
   changePaymentIndex(index) {
     paymentIndex.value = index;
   }
 
   placeMyOrder({required orderPaymentMethod, required totalAmount}) async {
     placingOrder.value = true;
+    // Generate dynamic order code
+    String orderCode = generateOrderCode();
     await getProductDetails();
     await firestore.collection(ordersCollection).doc().set({
       "order_by": currentUser!.uid,
@@ -47,7 +57,8 @@ class CartController extends GetxController {
       "order_delivered": false,
       "order_on_delivery": false,
       "total_amount": totalAmount,
-      "orders": FieldValue.arrayUnion(products)
+      "orders": FieldValue.arrayUnion(products),
+      "order_code": orderCode,
     });
     placingOrder(false);
   }

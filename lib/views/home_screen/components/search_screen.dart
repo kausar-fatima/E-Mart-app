@@ -46,13 +46,13 @@ class SearchScreen extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       10.heightBox,
-                      "${filtered[index]['p_name'][0]}"
+                      "${filtered[index]['p_name']}"
                           .text
                           .fontFamily(semibold)
                           .color(darkFontGrey)
                           .make(),
                       10.heightBox,
-                      "${filtered[index]['p_price'][0]}"
+                      "${filtered[index]['p_price']}"
                           .numCurrency
                           .text
                           .color(redColor)

@@ -34,6 +34,8 @@ class HomeScreen extends StatelessWidget {
                             );
                           },
                         );
+                      } else {
+                        VxToast.show(context, msg: "Please enter product name");
                       }
                     },
                   ),
@@ -198,18 +200,18 @@ class HomeScreen extends StatelessWidget {
                                           children: [
                                             Image.network(
                                               featuredData[index]['p_imgs'][0],
-                                              width: 130,
-                                              height: 130,
+                                              width: 180,
+                                              height: 150,
                                               fit: BoxFit.cover,
                                             ),
                                             10.heightBox,
-                                            "${featuredData[index]['p_name'][0]}"
+                                            "${featuredData[index]['p_name']}"
                                                 .text
                                                 .fontFamily(semibold)
                                                 .color(darkFontGrey)
                                                 .make(),
                                             10.heightBox,
-                                            "${featuredData[index]['p_price'][0]}"
+                                            "${featuredData[index]['p_price']}"
                                                 .numCurrency
                                                 .text
                                                 .color(redColor)
@@ -297,13 +299,13 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                     Spacer(),
                                     10.heightBox,
-                                    allproductData[index]['p_name'][0]
+                                    "${allproductData[index]['p_name'][0]}"
                                         .text
                                         .fontFamily(semibold)
                                         .color(darkFontGrey)
                                         .make(),
                                     10.heightBox,
-                                    allproductData[index]['p_price'][0]
+                                    "${allproductData[index]['p_price'][0]}"
                                         .text
                                         .color(redColor)
                                         .size(16)

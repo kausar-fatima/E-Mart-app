@@ -2,7 +2,6 @@ import 'package:e_mart_app/consts/consts.dart';
 import 'package:e_mart_app/views/chat_screen/messaging_screen.dart';
 import 'package:e_mart_app/views/orders_screen/order_screen.dart';
 import 'package:e_mart_app/views/wishlist_screen/wishlist_screen.dart';
-import 'package:e_mart_app/widgets_common/loading_indicator.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -47,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
 
                     // users details section
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(4.0),
                       child: Row(
                         children: [
                           data['imageUrl'] == ''
@@ -58,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                                 ).box.roundedFull.clip(Clip.antiAlias).make()
                               : Image.network(
                                   data['imageUrl'],
-                                  width: 70,
+                                  width: 60,
                                   fit: BoxFit.cover,
                                 )
                                   .box
@@ -93,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    20.heightBox,
+                    5.heightBox,
                     FutureBuilder(
                         future: FirestoreServices.getCounts(),
                         builder:

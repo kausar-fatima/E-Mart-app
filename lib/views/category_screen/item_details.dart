@@ -22,6 +22,7 @@ class ItemDetails extends StatelessWidget {
           leading: IconButton(
             onPressed: () {
               controller.resetValues();
+              Get.back();
             },
             icon: Icon(Icons.arrow_back),
           ),
