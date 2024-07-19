@@ -5,7 +5,7 @@ Widget senderBubble(DocumentSnapshot data) {
   var t =
       data['created_on'] == null ? DateTime.now() : data['created_on'].toDate();
 
-  var time = intl.DateFormat("h: mna").format(t);
+  var time = intl.DateFormat("h: mma").format(t);
   return Directionality(
     textDirection:
         data['uid'] == currentUser!.uid ? TextDirection.rtl : TextDirection.ltr,

@@ -299,13 +299,13 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                     Spacer(),
                                     10.heightBox,
-                                    "${allproductData[index]['p_name'][0]}"
+                                    "${allproductData[index]['p_name']}"
                                         .text
                                         .fontFamily(semibold)
                                         .color(darkFontGrey)
                                         .make(),
                                     10.heightBox,
-                                    "${allproductData[index]['p_price'][0]}"
+                                    "${allproductData[index]['p_price']}"
                                         .text
                                         .color(redColor)
                                         .size(16)

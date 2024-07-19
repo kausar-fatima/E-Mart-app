@@ -19,13 +19,13 @@ class ChatScreen extends StatelessWidget {
         padding: EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Obx(
-              () => controller.isLoading.value
-                  ? Center(
-                      child: loadingIndicator(),
-                    )
-                  : Expanded(
-                      child: StreamBuilder(
+            Expanded(
+              child: Obx(
+                () => controller.isLoading.value
+                    ? Center(
+                        child: loadingIndicator(),
+                      )
+                    : StreamBuilder(
                         stream: FirestoreServices.getChatMessages(
                             controller.chatDocId.toString()),
                         builder: (BuildContext context,
@@ -56,7 +56,7 @@ class ChatScreen extends StatelessWidget {
                           }
                         },
                       ),
-                    ),
+              ),
             ),
             10.heightBox,
             Row(

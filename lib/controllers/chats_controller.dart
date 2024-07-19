@@ -1,8 +1,7 @@
 import 'package:e_mart_app/consts/consts.dart';
 
 class ChatsController extends GetxController {
-
-   @override
+  @override
   void onInit() {
     getChatId();
     super.onInit();
@@ -23,44 +22,46 @@ class ChatsController extends GetxController {
 
   getChatId() async {
     isLoading(true);
-    await chats.where('users', isEqualTo: (friendId: null, currentId: null)).limit(1).get().then((QuerySnapshot snapshot){
-      if(snapshot.docs.isNotEmpty){
-        chatDocId = snapshot.docs.single.id;
-      }else{
-        chats.add(
-          {
-            "created_on": null,
-            "last_msg": '',
-            "users": {friendId: null, currentId: null},
-            "toId": '',
-            "fromId": '',
-            "friend_name": friendName,
-            "sender_name": senderName,
+    await chats
+        .where('users', isEqualTo: (friendId: friendId, currentId: currentId))
+        .limit(1)
+        .get()
+        .then((QuerySnapshot snapshot) {
+          if (snapshot.docs.isNotEmpty) {
+            chatDocId = snapshot.docs.single.id;
+          } else {
+            chats.add({
+              "created_on": FieldValue.serverTimestamp(),
+              "last_msg": '',
+              "users": {friendId: friendId, currentId: currentId},
+              "toId": '',
+              "fromId": '',
+              "friend_name": friendName,
+              "sender_name": senderName,
+            }).then(
+              (value) {
+                chatDocId = value.id;
+              },
+            );
           }
-        ).then((value) {
-          chatDocId = value.id;
-        },);
-      }
-    });
+        });
     isLoading(false);
   }
 
   // Send Message
-  sendMsg(String msg){
-    if(msg.trim().isNotEmpty){
-      chats.doc(chatDocId).update(
-        {
-          "created_on": FieldValue.serverTimestamp(),
-          "last_msg": msg,
-          "toId": friendId,
-          "fromId": currentId
-        }
-      );
+  sendMsg(String msg) {
+    if (msg.trim().isNotEmpty) {
+      chats.doc(chatDocId).update({
+        "created_on": FieldValue.serverTimestamp(),
+        "last_msg": msg,
+        "toId": friendId,
+        "fromId": currentId
+      });
 
       chats.doc(chatDocId).collection(messagesCollection).doc().set({
-         "created_on": FieldValue.serverTimestamp(),
-          "msg": msg,
-          "uid": currentId
+        "created_on": FieldValue.serverTimestamp(),
+        "msg": msg,
+        "uid": currentId
       });
     }
   }

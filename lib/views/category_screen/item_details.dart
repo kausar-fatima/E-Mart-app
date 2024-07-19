@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:e_mart_app/consts/consts.dart';
 
 class ItemDetails extends StatelessWidget {
@@ -9,12 +11,10 @@ class ItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.put(ProductController());
-    return PopScope(
-      onPopInvoked: (didPop) {
-        if (didPop) {
-          controller.resetValues();
-          Get.back();
-        }
+    return WillPopScope(
+      onWillPop: () async {
+        controller.resetValues();
+        return true;
       },
       child: Scaffold(
         backgroundColor: lightGrey,
