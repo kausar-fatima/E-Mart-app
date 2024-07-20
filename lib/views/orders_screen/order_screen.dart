@@ -1,4 +1,5 @@
 import 'package:e_mart_app/consts/consts.dart';
+import 'package:e_mart_app/views/orders_screen/orders_details.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
@@ -43,7 +44,13 @@ class OrderScreen extends StatelessWidget {
                         .fontFamily(bold)
                         .make(),
                     trailing: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(
+                          () => OrdersDetails(
+                            data: data[index],
+                          ),
+                        );
+                      },
                       icon: Icon(
                         Icons.arrow_forward_ios_rounded,
                         color: darkFontGrey,

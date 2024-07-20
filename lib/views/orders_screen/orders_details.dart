@@ -50,18 +50,18 @@ class OrdersDetails extends StatelessWidget {
               Column(
                 children: [
                   OrderPlaceDetails(
-                      d1: data['order_code'],
+                      d1: data['order_code'].toString(),
                       d2: data['shipping_method'],
                       title1: "Order Code",
                       title2: "Shipping Method"),
-                  OrderPlaceDetails(
-                      // d1: Intl.DateFormat()
-                      //     .add_yMd
-                      //     .format((data['order_date'].toDate())),
-                      d1: data['order_date'].toDate().toString(),
-                      d2: data['payment_method'],
-                      title1: "Order Date",
-                      title2: "Payment Method"),
+                  // OrderPlaceDetails(
+                  //     // d1: Intl.DateFormat()
+                  //     //     .add_yMd
+                  //     //     .format((data['order_date'].toDate())),
+                  //     d1: data['order_date'].toDate().toString(),
+                  //     d2: data['payment_method'],
+                  //     title1: "Order Date",
+                  //     title2: "Payment Method"),
                   OrderPlaceDetails(
                       d1: "Unpaid",
                       d2: "Order Placed",
@@ -92,7 +92,7 @@ class OrdersDetails extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               "Total Amount".text.fontFamily(semibold).make(),
-                              "${data['total_amount']}"
+                              data['total_amount']
                                   .text
                                   .color(redColor)
                                   .fontFamily(bold)
@@ -125,8 +125,8 @@ class OrdersDetails extends StatelessWidget {
                       children: [
                         OrderPlaceDetails(
                             title1: "${data['orders'][index]['title']}",
-                            title2: "${data['orders'][index]['tprice']}",
-                            d1: "${data['orders'][index]['qty']}",
+                            title2: data['orders'][index]['tprice'].toString(),
+                            d1: data['orders'][index]['qty'].toString(),
                             d2: "Refundaable"),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16),
