@@ -1,7 +1,6 @@
 import 'package:e_mart_app/consts/consts.dart';
 import 'package:e_mart_app/views/orders_screen/components/order_place_details.dart';
 import 'package:e_mart_app/views/orders_screen/components/order_status.dart';
-import 'package:intl/intl.dart';
 
 class OrdersDetails extends StatelessWidget {
   const OrdersDetails({super.key, this.data});
@@ -50,8 +49,8 @@ class OrdersDetails extends StatelessWidget {
               Column(
                 children: [
                   OrderPlaceDetails(
-                      d1: data['order_code'].toString(),
-                      d2: data['shipping_method'],
+                      d1: "${data['order_code']}",
+                      d2: "${data['shipping_method']}",
                       title1: "Order Code",
                       title2: "Shipping Method"),
                   // OrderPlaceDetails(
@@ -125,8 +124,8 @@ class OrdersDetails extends StatelessWidget {
                       children: [
                         OrderPlaceDetails(
                             title1: "${data['orders'][index]['title']}",
-                            title2: data['orders'][index]['tprice'].toString(),
-                            d1: data['orders'][index]['qty'].toString(),
+                            title2: data['orders'][index]['tprice'],
+                            d1: data['orders'][index]['qty'],
                             d2: "Refundaable"),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16),
