@@ -47,7 +47,7 @@ class OrderScreen extends StatelessWidget {
                       onPressed: () {
                         Get.to(
                           () => OrdersDetails(
-                            data: data[index],
+                            data: data[index] ?? "EMPTY",
                           ),
                         );
                       },

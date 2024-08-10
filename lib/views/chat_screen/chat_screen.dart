@@ -5,7 +5,9 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("IN CHAT SCREEN");
     var controller = Get.put(ChatsController());
+    print("CHAT SCREEN PUT"); // g?directional use kiya hy is liya ulta hy
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
@@ -16,7 +18,8 @@ class ChatScreen extends StatelessWidget {
             .make(),
       ),
       body: Padding(
-        padding: EdgeInsets.all(8.0),
+        //kausarfatima1044@gmail.com          fatima25
+        padding: EdgeInsets.all(8.0), // yaha type kar dein email and password
         child: Column(
           children: [
             Expanded(
@@ -30,6 +33,11 @@ class ChatScreen extends StatelessWidget {
                             controller.chatDocId.toString()),
                         builder: (BuildContext context,
                             AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            return const Center(
+                              child: Text("Error Occur"),
+                            );
+                          }
                           if (!snapshot.hasData) {
                             return Center(
                               child: loadingIndicator(),

@@ -3,6 +3,7 @@ import 'package:e_mart_app/consts/consts.dart';
 class ChatsController extends GetxController {
   @override
   void onInit() {
+    print("CHAT INIT CALLED");
     getChatId();
     super.onInit();
   }
@@ -21,31 +22,33 @@ class ChatsController extends GetxController {
   var isLoading = false.obs;
 
   getChatId() async {
-    isLoading(true);
-    await chats
-        .where('users', isEqualTo: (friendId: friendId, currentId: currentId))
-        .limit(1)
-        .get()
-        .then((QuerySnapshot snapshot) {
-          if (snapshot.docs.isNotEmpty) {
-            chatDocId = snapshot.docs.single.id;
-          } else {
-            chats.add({
-              "created_on": FieldValue.serverTimestamp(),
-              "last_msg": '',
-              "users": {friendId: friendId, currentId: currentId},
-              "toId": '',
-              "fromId": '',
-              "friend_name": friendName,
-              "sender_name": senderName,
-            }).then(
-              (value) {
-                chatDocId = value.id;
-              },
-            );
-          }
+    try {
+      isLoading(true);
+      // yeah error hai
+      final snapshot = await chats
+          .where('users', isEqualTo: {friendId: friendId, currentId: currentId})
+          .limit(1)
+          .get();
+
+      if (snapshot.docs.isNotEmpty) {
+        chatDocId = snapshot.docs.single.id;
+      } else {
+        final value = await chats.add({
+          "created_on": FieldValue.serverTimestamp(),
+          "last_msg": '',
+          "users": {friendId: friendId, currentId: currentId},
+          "toId": '',
+          "fromId": '',
+          "friend_name": friendName,
+          "sender_name": senderName,
         });
-    isLoading(false);
+        chatDocId = value.id;
+      }
+
+      isLoading(false);
+    } catch (e) {
+      debugPrint("ERROR CHAT $e");
+    }
   }
 
   // Send Message

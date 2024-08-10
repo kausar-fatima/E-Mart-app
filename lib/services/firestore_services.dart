@@ -32,8 +32,6 @@ class FirestoreServices {
 
   // get all chat messages
   static getChatMessages(docId) {
-    print(
-        "${firestore.collection(chatsCollection).doc(docId).collection(messagesCollection).orderBy('created_on', descending: false).snapshots()}");
     return firestore
         .collection(chatsCollection)
         .doc(docId)
