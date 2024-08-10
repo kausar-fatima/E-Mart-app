@@ -45,11 +45,16 @@ class OrderScreen extends StatelessWidget {
                         .make(),
                     trailing: IconButton(
                       onPressed: () {
-                        Get.to(
-                          () => OrdersDetails(
-                            data: data[index] ?? "EMPTY",
-                          ),
-                        );
+                        try {
+                          print(data[index].data());
+                          Get.to(
+                            () => OrdersDetails(
+                              data: data[index].data(),
+                            ),
+                          );
+                        } catch (e) {
+                          print("ERROR IN IRDER $e");
+                        }
                       },
                       icon: Icon(
                         Icons.arrow_forward_ios_rounded,

@@ -28,39 +28,39 @@ class OrdersDetails extends StatelessWidget {
                   color: redColor,
                   icon: Icons.done,
                   title: "Placed",
-                  showDone: data['order_placed']),
+                  showDone: data['order_placed'] ?? false),
               orderStatus(
                   color: Colors.blue,
                   icon: Icons.thumb_up,
                   title: "Confirmed",
-                  showDone: data['order_confirmed']),
+                  showDone: data['order_confirmed'] ?? false),
               orderStatus(
                   color: Colors.yellow,
                   icon: Icons.car_crash,
                   title: "On Delivery",
-                  showDone: data['order_on_delivery']),
+                  showDone: data['order_on_delivery'] ?? false),
               orderStatus(
                   color: Colors.purple,
                   icon: Icons.done_all_rounded,
                   title: "Delivered",
-                  showDone: data['order_delivered']),
-              Divider(),
+                  showDone: data['order_delivered'] ?? false),
+              const Divider(),
               10.heightBox,
               Column(
                 children: [
                   OrderPlaceDetails(
-                      d1: "${data['order_code']}",
-                      d2: "${data['shipping_method']}",
+                      d1: "${data['order_code'] ?? 'Unpaid'}",
+                      d2: "${data['shipping_method'] ?? 'Order placed'}",
                       title1: "Order Code",
                       title2: "Shipping Method"),
-                  // OrderPlaceDetails(
-                  //     // d1: Intl.DateFormat()
-                  //     //     .add_yMd
-                  //     //     .format((data['order_date'].toDate())),
-                  //     d1: data['order_date'].toDate().toString(),
-                  //     d2: data['payment_method'],
-                  //     title1: "Order Date",
-                  //     title2: "Payment Method"),
+                  OrderPlaceDetails(
+                      // d1: Intl.DateFormat()
+                      //     .add_yMd
+                      //     .format((data['order_date'].toDate())),
+                      d1: data['order_date'].toString().toDate().toString(),
+                      d2: data['payment_method'],
+                      title1: "Order Date",
+                      title2: "Payment Method"),
                   OrderPlaceDetails(
                       d1: "Unpaid",
                       d2: "Order Placed",
@@ -71,18 +71,23 @@ class OrdersDetails extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     child: Row(
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            "Shipping Address".text.fontFamily(semibold).make(),
-                            "${data['order_by_name']}".text.make(),
-                            "${data['order_by_email']}".text.make(),
-                            "${data['order_by_address']}".text.make(),
-                            "${data['order_by_city']}".text.make(),
-                            "${data['order_by_state']}".text.make(),
-                            "${data['order_by_phone']}".text.make(),
-                            "${data['order_by_postalcode']}".text.make(),
-                          ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              "Shipping Address"
+                                  .text
+                                  .fontFamily(semibold)
+                                  .make(),
+                              "${data['order_by_name']}".text.make(),
+                              "${data['order_by_email']}".text.make(),
+                              "${data['order_by_address']}".text.make(),
+                              "${data['order_by_city']}".text.make(),
+                              "${data['order_by_state']}".text.make(),
+                              "${data['order_by_phone']}".text.make(),
+                              "${data['order_by_postalcode']}".text.make(),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           width: 130,
@@ -92,6 +97,7 @@ class OrdersDetails extends StatelessWidget {
                             children: [
                               "Total Amount".text.fontFamily(semibold).make(),
                               data['total_amount']
+                                  .toString()
                                   .text
                                   .color(redColor)
                                   .fontFamily(bold)
@@ -104,7 +110,7 @@ class OrdersDetails extends StatelessWidget {
                   ),
                 ],
               ).box.outerShadowMd.white.make(),
-              Divider(),
+              const Divider(),
               10.heightBox,
               "Order Product"
                   .text
@@ -114,27 +120,30 @@ class OrdersDetails extends StatelessWidget {
                   .makeCentered(),
               10.heightBox,
               ListView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: List.generate(
                   data['orders'].length,
                   (index) {
+                    final color = data['orders'][index]['color'];
+                    // return SizedBox();
+                    final title = data['orders'][index]['title'] ?? '';
+                    final tprice = data['orders'][index]['tprice'] ?? 0;
+                    final qty = data['orders'][index]['qty'] ?? 0;
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         OrderPlaceDetails(
-                            title1: "${data['orders'][index]['title']}",
-                            title2: data['orders'][index]['tprice'],
-                            d1: data['orders'][index]['qty'],
+                            title1: title,
+                            title2: tprice.toString(),
+                            d1: qty.toString(),
                             d2: "Refundaable"),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Container(
                             width: 30,
                             height: 20,
-                            color: Color(
-                              data['orders'][index]['color'],
-                            ),
+                            color: Color(int.parse(color)),
                           ),
                         ),
                         const Divider(),
@@ -146,7 +155,7 @@ class OrdersDetails extends StatelessWidget {
                   .box
                   .outerShadowMd
                   .white
-                  .margin(EdgeInsets.only(bottom: 4))
+                  .margin(const EdgeInsets.only(bottom: 4))
                   .make(),
               20.heightBox,
             ],
