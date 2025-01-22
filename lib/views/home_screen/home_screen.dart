@@ -143,7 +143,7 @@ class HomeScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: List.generate(
-                          3,
+                          2,
                           (index) => Column(
                             children: [
                               featuredButton(
@@ -297,7 +297,7 @@ class HomeScreen extends StatelessWidget {
                                       width: 200,
                                       fit: BoxFit.cover,
                                     ),
-                                    Spacer(),
+                                    // Spacer(),
                                     10.heightBox,
                                     "${allproductData[index]['p_name']}"
                                         .text

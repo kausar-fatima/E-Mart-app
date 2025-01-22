@@ -25,7 +25,7 @@ class _CategoryDetailsState extends State<CategoryDetails> {
     }
   }
 
-  var controller = Get.find<ProductController>();
+  var controller = Get.put(ProductController());
 // FirestoreServices.getProducts(widget.title)
 
   dynamic productMethod;

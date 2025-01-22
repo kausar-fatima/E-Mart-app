@@ -3,7 +3,6 @@ import 'package:e_mart_app/consts/consts.dart';
 Widget cusButton({onPress, color, textColor, String? title}) {
   return ElevatedButton(
     onPressed: onPress,
-    child: title!.text.color(textColor).fontFamily(bold).make(),
     style: ElevatedButton.styleFrom(
       backgroundColor: color,
       shape: const ContinuousRectangleBorder(
@@ -13,5 +12,6 @@ Widget cusButton({onPress, color, textColor, String? title}) {
       ),
       padding: const EdgeInsets.all(12),
     ),
+    child: title!.text.color(textColor).fontFamily(bold).make(),
   );
 }

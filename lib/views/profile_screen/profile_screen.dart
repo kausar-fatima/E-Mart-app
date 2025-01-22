@@ -22,6 +22,13 @@ class ProfileScreen extends StatelessWidget {
                   valueColor: AlwaysStoppedAnimation(redColor),
                 ),
               );
+            } else if (snapshot.data!.docs.isEmpty) {
+              return const Center(
+                child: Text(
+                  'No user data found.',
+                  style: TextStyle(color: Colors.white),
+                ),
+              );
             } else {
               var data = snapshot.data!.docs[0];
 

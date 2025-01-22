@@ -24,7 +24,7 @@ class SearchScreen extends StatelessWidget {
                 .where(
                   (element) =>
                       element['p_name'].toString().toLowerCase().contains(
-                            title!.toLowerCase(),
+                            title.toLowerCase(),
                           ),
                 )
                 .toList();
